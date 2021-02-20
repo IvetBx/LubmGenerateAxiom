@@ -58,7 +58,7 @@ public class ClassWithSubclasses {
             }
         }
 
-        if(numberOfClasses < y){
+        if(combinations.size() < y){
             return combinations;
         }
         Collections.shuffle(combinations);

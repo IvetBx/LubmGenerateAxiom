@@ -25,10 +25,15 @@ n - dlzka n-tic, teda v axiome DummyClass \ekvivalent C1 \and C2 ... \and Cn je 
 y - pocet takychto n-tic, co v podstate bude zodpovedat aj poctu vygenerovanych modifikovanych ontologii
 
 InputFileForMHS_MXP
-- trieda ktora pre jednu konkretnu upravenu ontologiu vytvori input file pre jeden beh MHS_MXP algoritmu (takisto bude ulozeny v priecinku, kde sa ukladaju aj upravene ontologie, s rovnakym nazvom, aky ma prisluchajuca ontologia, iba s s priponou .txt namiesto .owl a na konci nazvu je este _input)
+- trieda, ktora pre jednu konkretnu upravenu ontologiu vytvori input file pre jeden beh MHS_MXP algoritmu (takisto bude ulozeny v priecinku, kde sa ukladaju aj upravene ontologie, s rovnakym nazvom, aky ma prisluchajuca ontologia, iba s s priponou .txt namiesto .owl a na konci nazvu je este _input)
 
-Na spustenie u seba je potrebna aj kninica jena, a kedze ona nie je priamo v projekte, tak asi ju bude treba stiahnut, ale to vlastne iba z tejto stranky:
+*************
+KNIZNICA
+Na spustenie u seba je potrebna aj kniznica jena, a kedze ona nie je priamo v projekte, tak asi ju bude treba stiahnut, ale to vlastne iba z tejto stranky:
 https://jena.apache.org/download/index.cgi
 stiahnut apache-jena-3.17.0.zip no a nasledne ju priadat do projektu
 (v IntelliJ to islo cez File/Project Structure/Global Libraries a tam cez + si staci najst kde je ten rozzipovany priecinok s Jena, v nom najst lib a nasledne dat Apply a potvrdit)
+*************
+Pozn.:
+fileWithOntology a fileWithClasses je pravdepodobne davat absolutnu cestu k suborom na vstup, pretoze to moze robit problemy, ked som to skusala stiahnut a pustit na inom PC
 

@@ -35,9 +35,8 @@ public class InputFileForMHS_MXP {
         return individualList.get(index);
     }
 
-    public void createInputFile(String ontologyName, OntClass classFromAxiom, String fileName, boolean negation) throws IOException {
+    public void createInputFile(String ontologyName, OntClass classFromAxiom, String fileName, boolean negation, Individual individual) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
-        Individual individual = getRandomIndividual();
 
         String ontologyFile = folderWithModifiedOntology + ontologyName;
         String observationFormat = "%s:%s(%s:%s)";

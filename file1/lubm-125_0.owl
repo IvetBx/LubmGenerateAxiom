@@ -51,7 +51,7 @@
     <owl:equivalentClass>
       <owl:Class>
         <owl:intersectionOf rdf:parseType="Collection">
-          <owl:Class rdf:about="http://swat.cse.lehigh.edu/onto/univ-bench.owl#Student"/>
+          <owl:Class rdf:about="http://swat.cse.lehigh.edu/onto/univ-bench.owl#Work"/>
         </owl:intersectionOf>
       </owl:Class>
     </owl:equivalentClass>

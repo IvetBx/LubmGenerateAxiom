@@ -24,6 +24,11 @@
       </owl:Class>
     </owl:equivalentClass>
   </owl:Class>
+  <owl:Class>
+    <owl:intersectionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="http://swat.cse.lehigh.edu/onto/univ-bench.owl#Work"/>
+    </owl:intersectionOf>
+  </owl:Class>
   <owl:Class rdf:about="http://swat.cse.lehigh.edu/onto/univ-bench.owl#GraduateStudent">
     <rdfs:label>graduate student</rdfs:label>
     <rdfs:subClassOf>
@@ -51,7 +56,7 @@
     <owl:equivalentClass>
       <owl:Class>
         <owl:intersectionOf rdf:parseType="Collection">
-          <owl:Class rdf:about="http://swat.cse.lehigh.edu/onto/univ-bench.owl#Publication"/>
+          <owl:Class rdf:about="http://swat.cse.lehigh.edu/onto/univ-bench.owl#AdministrativeStaff"/>
         </owl:intersectionOf>
       </owl:Class>
     </owl:equivalentClass>
@@ -208,11 +213,6 @@
     <rdfs:subClassOf>
       <owl:Class rdf:about="http://swat.cse.lehigh.edu/onto/univ-bench.owl#Professor"/>
     </rdfs:subClassOf>
-  </owl:Class>
-  <owl:Class>
-    <owl:intersectionOf rdf:parseType="Collection">
-      <owl:Class rdf:about="http://swat.cse.lehigh.edu/onto/univ-bench.owl#Student"/>
-    </owl:intersectionOf>
   </owl:Class>
   <owl:Class rdf:about="http://swat.cse.lehigh.edu/onto/univ-bench.owl#TeachingAssistant">
     <rdfs:label>university teaching assistant</rdfs:label>

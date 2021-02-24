@@ -6,6 +6,11 @@
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
   <owl:Ontology rdf:about="owlapi:ontology#ont24525195307693"/>
+  <owl:Class>
+    <owl:intersectionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="http://swat.cse.lehigh.edu/onto/univ-bench.owl#Professor"/>
+    </owl:intersectionOf>
+  </owl:Class>
   <owl:Class rdf:about="http://swat.cse.lehigh.edu/onto/univ-bench.owl#Employee">
     <rdfs:label>Employee</rdfs:label>
     <owl:equivalentClass>
@@ -23,6 +28,11 @@
         </owl:intersectionOf>
       </owl:Class>
     </owl:equivalentClass>
+  </owl:Class>
+  <owl:Class>
+    <owl:intersectionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="http://swat.cse.lehigh.edu/onto/univ-bench.owl#Work"/>
+    </owl:intersectionOf>
   </owl:Class>
   <owl:Class rdf:about="http://swat.cse.lehigh.edu/onto/univ-bench.owl#GraduateStudent">
     <rdfs:label>graduate student</rdfs:label>
@@ -119,11 +129,6 @@
       </owl:Class>
     </owl:equivalentClass>
   </owl:Class>
-  <owl:Class>
-    <owl:intersectionOf rdf:parseType="Collection">
-      <owl:Class rdf:about="http://swat.cse.lehigh.edu/onto/univ-bench.owl#Publication"/>
-    </owl:intersectionOf>
-  </owl:Class>
   <owl:Class rdf:about="http://swat.cse.lehigh.edu/onto/univ-bench.owl#JournalArticle">
     <rdfs:label>journal article</rdfs:label>
     <rdfs:subClassOf>
@@ -214,11 +219,6 @@
       <owl:Class rdf:about="http://swat.cse.lehigh.edu/onto/univ-bench.owl#Professor"/>
     </rdfs:subClassOf>
   </owl:Class>
-  <owl:Class>
-    <owl:intersectionOf rdf:parseType="Collection">
-      <owl:Class rdf:about="http://swat.cse.lehigh.edu/onto/univ-bench.owl#Student"/>
-    </owl:intersectionOf>
-  </owl:Class>
   <owl:Class rdf:about="http://swat.cse.lehigh.edu/onto/univ-bench.owl#TeachingAssistant">
     <rdfs:label>university teaching assistant</rdfs:label>
     <owl:equivalentClass>
@@ -279,6 +279,11 @@
       <owl:Class rdf:about="http://swat.cse.lehigh.edu/onto/univ-bench.owl#Publication"/>
     </rdfs:subClassOf>
   </owl:Class>
+  <owl:Class>
+    <owl:intersectionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="http://swat.cse.lehigh.edu/onto/univ-bench.owl#AdministrativeStaff"/>
+    </owl:intersectionOf>
+  </owl:Class>
   <owl:Class rdf:about="http://swat.cse.lehigh.edu/onto/univ-bench.owl#Institute">
     <rdfs:label>institute</rdfs:label>
     <rdfs:subClassOf rdf:resource="http://swat.cse.lehigh.edu/onto/univ-bench.owl#Organization"/>
@@ -293,11 +298,6 @@
   <owl:Class rdf:about="http://swat.cse.lehigh.edu/onto/univ-bench.owl#Research">
     <rdfs:label>research work</rdfs:label>
     <rdfs:subClassOf rdf:resource="http://swat.cse.lehigh.edu/onto/univ-bench.owl#Work"/>
-  </owl:Class>
-  <owl:Class>
-    <owl:intersectionOf rdf:parseType="Collection">
-      <owl:Class rdf:about="http://swat.cse.lehigh.edu/onto/univ-bench.owl#Employee"/>
-    </owl:intersectionOf>
   </owl:Class>
   <owl:Class rdf:about="http://swat.cse.lehigh.edu/onto/univ-bench.owl#AdministrativeStaff">
     <rdfs:label>administrative staff worker</rdfs:label>

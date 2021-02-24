@@ -44,6 +44,12 @@
     <rdfs:label>faculty member</rdfs:label>
     <rdfs:subClassOf rdf:resource="http://swat.cse.lehigh.edu/onto/univ-bench.owl#Employee"/>
   </owl:Class>
+  <owl:Class>
+    <owl:intersectionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="http://swat.cse.lehigh.edu/onto/univ-bench.owl#Organization"/>
+      <owl:Class rdf:about="http://swat.cse.lehigh.edu/onto/univ-bench.owl#Student"/>
+    </owl:intersectionOf>
+  </owl:Class>
   <owl:Class rdf:about="http://swat.cse.lehigh.edu/onto/univ-bench.owl#Person">
     <rdfs:label>person</rdfs:label>
   </owl:Class>
@@ -51,8 +57,8 @@
     <owl:equivalentClass>
       <owl:Class>
         <owl:intersectionOf rdf:parseType="Collection">
-          <owl:Class rdf:about="http://swat.cse.lehigh.edu/onto/univ-bench.owl#Organization"/>
           <owl:Class rdf:about="http://swat.cse.lehigh.edu/onto/univ-bench.owl#Employee"/>
+          <owl:Class rdf:about="http://swat.cse.lehigh.edu/onto/univ-bench.owl#Faculty"/>
         </owl:intersectionOf>
       </owl:Class>
     </owl:equivalentClass>
@@ -269,12 +275,6 @@
     <rdfs:subClassOf>
       <owl:Class rdf:about="http://swat.cse.lehigh.edu/onto/univ-bench.owl#Publication"/>
     </rdfs:subClassOf>
-  </owl:Class>
-  <owl:Class>
-    <owl:intersectionOf rdf:parseType="Collection">
-      <owl:Class rdf:about="http://swat.cse.lehigh.edu/onto/univ-bench.owl#Publication"/>
-      <owl:Class rdf:about="http://swat.cse.lehigh.edu/onto/univ-bench.owl#Article"/>
-    </owl:intersectionOf>
   </owl:Class>
   <owl:Class rdf:about="http://swat.cse.lehigh.edu/onto/univ-bench.owl#Institute">
     <rdfs:label>institute</rdfs:label>

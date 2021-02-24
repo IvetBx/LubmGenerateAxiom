@@ -7,6 +7,8 @@ import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
+
+import org.apache.jena.ontology.Individual;
 import org.apache.jena.ontology.OntClass;
 import org.apache.jena.ontology.OntModel;
 import org.apache.jena.rdf.model.*;
@@ -106,8 +108,11 @@ public class Main {
             //vytvorenie inputFile pre MHS_MXP algoritmus pre konkretnu ontologiu s nahodne vybranym individualom z nej
             String inputFileName = "lubm-" + numberOfIndividuals + "_" + i + "_inputJulkaG_notNegation.txt";
             String inputFileNameNegation = "lubm-" + numberOfIndividuals + "_" + i + "_inputJulkaG.txt";
-            inputFile.createInputFile(ontologyName, dummyClass, newFolder + inputFileName, false);
-            inputFile.createInputFile(ontologyName, dummyClass, newFolder + inputFileNameNegation, true);
+
+            Individual individual = inputFile.getRandomIndividual();
+
+            inputFile.createInputFile(ontologyName, dummyClass, newFolder + inputFileName, false, individual);
+            inputFile.createInputFile(ontologyName, dummyClass, newFolder + inputFileNameNegation, true, individual);
 
             //classu po zapise do suboru mazem, aby ju stacilo v novej iteracii pridat a nie nacitavat znova celu ontologiu
             dummyClass.remove();
@@ -137,7 +142,7 @@ public class Main {
         for(int i = 1; i <= 5; i++){
             Main m = new Main();
             String folder = "file" + i + "/";
-            m.createModifiedOntology(fileWithOntology, numberOfIndividuals, fileWithClasses, folder, uriNewClass, i, 10, folderNameAlgorithm);
+            m.createModifiedOntology(fileWithOntology, numberOfIndividuals, fileWithClasses, folder, uriNewClass, i, 5, folderNameAlgorithm);
         }
 
         //Main m = new Main();

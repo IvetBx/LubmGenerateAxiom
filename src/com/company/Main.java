@@ -1,5 +1,6 @@
 package com.company;
 
+import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
@@ -11,6 +12,28 @@ import org.apache.jena.ontology.OntModel;
 import org.apache.jena.rdf.model.*;
 
 public class Main {
+
+    String configurationFile = "configurationFile.txt";
+
+    public void createFileWithConfiguration(List<String[]> combinations, String newFolder){
+        try {
+            FileWriter writer = new FileWriter(newFolder + configurationFile);
+            for(int i = 0; i < combinations.size(); i++){
+                for(int j = 0; j < combinations.get(i).length; j++){
+                    if(j != combinations.get(i).length - 1){
+                        writer.append(combinations.get(i)[j] + ", ");
+                    } else {
+                        writer.append(combinations.get(i)[j] + "\n");
+                    }
+                }
+                writer.append("\n");
+            }
+            writer.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public String createFolderWithOntologiesAndInputFiles(String newFolder){
         try{
@@ -59,6 +82,8 @@ public class Main {
             return;
         }
 
+        createFileWithConfiguration(combinationOfClasses, newFolder);
+
         //vytvori model ontologie podla owl suboru v premennej fileWithOntology
         OntModel model = ModelFactory.createOntologyModel();
         model.read(fileWithOntology);
@@ -70,7 +95,6 @@ public class Main {
 
         //vrchny cyklus prechadza vsetky n-tice, vnutorny cyklus naplni RDFNode list classami z kombinacii
         for(int i = 0; i < combinationOfClasses.size(); i++){
-            System.out.println(i);
             //vytvori sa v ontologii trieda DummyClass, ktora bude zadefinovana takto: DummyClass \ekvivalent (class1 \and class2 ... \and classN)
             OntClass dummyClass = createAxiom(model, combinationOfClasses, uriNewClass, i);
 
@@ -80,8 +104,10 @@ public class Main {
             writeOntologyToFile(model, newFolder, ontologyName);
 
             //vytvorenie inputFile pre MHS_MXP algoritmus pre konkretnu ontologiu s nahodne vybranym individualom z nej
-            String inputFileName = "lubm-" + numberOfIndividuals + "_" + i + "_input.txt";
-            inputFile.createInputFile(ontologyName, dummyClass, newFolder + inputFileName);
+            String inputFileName = "lubm-" + numberOfIndividuals + "_" + i + "_inputJulkaG_notNegation.txt";
+            String inputFileNameNegation = "lubm-" + numberOfIndividuals + "_" + i + "_inputJulkaG.txt";
+            inputFile.createInputFile(ontologyName, dummyClass, newFolder + inputFileName, false);
+            inputFile.createInputFile(ontologyName, dummyClass, newFolder + inputFileNameNegation, true);
 
             //classu po zapise do suboru mazem, aby ju stacilo v novej iteracii pridat a nie nacitavat znova celu ontologiu
             dummyClass.remove();
@@ -95,10 +121,11 @@ public class Main {
         String numberOfIndividuals = "125";
         //subor, kde na kazdom riadku je URI triedy, ktora ma nejake podtriedy (zatial iba rucne vytvorene pre LUBM)
         String fileWithClasses = "lubm-classes-with-subclasses.txt";
-        //nazor suboru do ktoreho chceme ulozit modifikovane ontologie z jedneho behu programu - je potrebne mat lomitko na konci
-        String newFolder = "file/";
         //URI novej triedy, ktora bude v axiome vystupovat
         String uriNewClass = "http://swat.cse.lehigh.edu/onto/univ-bench.owl#DummyClass";
+        //nazov suboru do ktoreho chceme ulozit modifikovane ontologie z jedneho behu programu - je potrebne mat lomitko na konci
+        String newFolder = "file/";
+
         //n-tice
         int n = 6;
         //pocet ontologii (teda n-tic), ktore chceme generovat
@@ -107,7 +134,13 @@ public class Main {
         //cesta k priecinku, kde budeme ukladat nove ontologie, aby sme mali zaciatok prveho riadku v input file
         String folderNameAlgorithm = "/home/gablikova4/mhs-mxp_v2/files/";
 
-        Main m = new Main();
-        m.createModifiedOntology(fileWithOntology, numberOfIndividuals, fileWithClasses, newFolder, uriNewClass, n, y, folderNameAlgorithm);
+        for(int i = 1; i <= 5; i++){
+            Main m = new Main();
+            String folder = "file" + i + "/";
+            m.createModifiedOntology(fileWithOntology, numberOfIndividuals, fileWithClasses, folder, uriNewClass, i, 10, folderNameAlgorithm);
+        }
+
+        //Main m = new Main();
+        //m.createModifiedOntology(fileWithOntology, numberOfIndividuals, fileWithClasses, newFolder, uriNewClass, n, y, folderNameAlgorithm);
     }
 }

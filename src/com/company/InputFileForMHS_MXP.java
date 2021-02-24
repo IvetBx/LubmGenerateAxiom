@@ -35,19 +35,31 @@ public class InputFileForMHS_MXP {
         return individualList.get(index);
     }
 
-    public void createInputFile(String ontologyName, OntClass classFromAxiom, String fileName) throws IOException {
+    public void createInputFile(String ontologyName, OntClass classFromAxiom, String fileName, boolean negation) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
         Individual individual = getRandomIndividual();
 
         String ontologyFile = folderWithModifiedOntology + ontologyName;
         String observationFormat = "%s:%s(%s:%s)";
-        String prefixClass = "ode";
-        String prefixIndividual = "lubm";
-        String observation = String.format(observationFormat, prefixClass, classFromAxiom.getLocalName(), prefixIndividual, individual.getLocalName());
-        String prefixes = prefixClass + ": " + classFromAxiom.getNameSpace() + "\n" +
-                            prefixIndividual + ": " + individual.getNameSpace() + "\n";
-        String file = String.format(formatInputFile, ontologyFile, observation, prefixes);
+        String prefixClass = "prefix1";
+        String prefixIndividual = "prefix2";
+        String observation = "";
+        String prefixes = "";
 
+        if(classFromAxiom.getNameSpace() == individual.getNameSpace()){
+            observation = String.format(observationFormat, prefixClass, classFromAxiom.getLocalName(), prefixClass, individual.getLocalName());
+            prefixes = prefixClass + ": " + classFromAxiom.getNameSpace();
+        } else {
+            observation = String.format(observationFormat, prefixClass, classFromAxiom.getLocalName(), prefixIndividual, individual.getLocalName());
+            prefixes = prefixClass + ": " + classFromAxiom.getNameSpace() + "\n" +
+                    prefixIndividual + ": " + individual.getNameSpace() + "\n";
+        }
+
+        String file = String.format(formatInputFile, ontologyFile, observation, prefixes);
+        if(!negation){
+            file += "\n-n: false";
+
+        }
         writer.write(file);
         writer.close();
     }

@@ -1,6 +1,0 @@
--f: /home/gablikova4/mhs-mxp_v2/files/file1/lubm-125_3.owl
--o: prefix1:DummyClass(prefix2:Course19)
--p: {
-prefix1: http://swat.cse.lehigh.edu/onto/univ-bench.owl#
-prefix2: http://www.Department9.University0.edu/
-}

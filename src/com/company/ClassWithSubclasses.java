@@ -1,17 +1,18 @@
 package com.company;
 
+import org.apache.commons.compress.archivers.StreamingNotSupportedException;
+
 import java.io.*;
 import java.security.InvalidParameterException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class ClassWithSubclasses {
 
     ArrayList<String> classWithSubclasses = new ArrayList<>();
+    String configurationFileName;
+    Set<Set<String>> alreadyUsedClasses = new HashSet<>();
 
-    public ClassWithSubclasses(String filename) {
+    public ClassWithSubclasses(String filename, String configurationFileName1) {
         try {
             File myObj = new File(filename);
             Scanner myReader = new Scanner(myObj);
@@ -20,10 +21,43 @@ public class ClassWithSubclasses {
                 classWithSubclasses.add(className);
             }
             myReader.close();
+            configurationFileName = configurationFileName1;
+            loadAlreadyUsedClasses();
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
+    }
+
+    public void loadAlreadyUsedClasses() throws FileNotFoundException {
+        Scanner sc = new Scanner(new File(configurationFileName));
+        StringBuffer buffer = new StringBuffer();
+        while (sc.hasNextLine()) {
+            String line = sc.nextLine();
+            if(!line.equals("")){
+                String[] classes = line.split(", ");
+                Set<String> targetSet = new HashSet<>(Arrays.asList(classes));
+                alreadyUsedClasses.add(targetSet);
+            }
+        }
+    }
+
+    public List<String[]> generateNewCombinationWithoutDuplication(List<String[]> combinations) {
+        List<String[]> newCombinations = new ArrayList<>();
+        for(int i = 0; i < combinations.size(); i++){
+            Set<String> targetSet = new HashSet<>(Arrays.asList(combinations.get(i)));
+            boolean equal = false;
+            for(Set<String> s : alreadyUsedClasses){
+                if(s.equals(targetSet)){
+                    equal = true;
+                    break;
+                }
+            }
+            if(!equal){
+                newCombinations.add(combinations.get(i));
+            }
+        }
+        return newCombinations;
     }
 
     public List<String[]> generate2(int n, int y) {
@@ -57,11 +91,13 @@ public class ClassWithSubclasses {
             }
         }
 
-        if(combinations.size() < y){
-            return combinations;
+        List<String[]> newCombinations = generateNewCombinationWithoutDuplication(combinations);
+
+        if(newCombinations.size() < y){
+            return newCombinations;
         }
-        Collections.shuffle(combinations);
-        return combinations.subList(0, y);
+        Collections.shuffle(newCombinations);
+        return newCombinations.subList(0, y);
     }
 
 

@@ -163,7 +163,29 @@ public class Main {
     }
 
     public static void main(String[] args) throws IOException {
-        //ontologia, z ktorej vychadzame - ideme do nej pridavat axiom
+
+        Main main = new Main();
+        int numberOfIndividuals = 0;
+        //String folderForInputFiles = "/home/iveta/Plocha/skola/diplomovka/testingFiles/testingFiles0/";
+        String folderWithConfigFiles = "/home/iveta/Plocha/skola/diplomovka/testingFiles/testingFiles1000/";
+        String ontology = "lubm-1000";
+        for(int i = 1; i <= 5; i++){
+            List<String[]> classes = main.loadAlreadyUsedClasses(folderWithConfigFiles + i + "_" + main.configurationFile);
+            List<String> individuals = new ArrayList<>();
+            if(numberOfIndividuals != 0){
+                individuals = main.loadAlreadyUsedIndividuals(folderWithConfigFiles + i + "_" + main.configurationFileIndividuals);
+            } else {
+                for(int j = 0; j < classes.size(); j++){
+                    individuals.add("http://www.Department9.University0.edu/" + "DummyIndividual");
+                }
+            }
+            NewInputFileForMHS_MXP newInputFileForMHSMxp = new NewInputFileForMHS_MXP(true, individuals, classes);
+            //newInputFileForMHSMxp.createAllInputFilesFromConfig(ontology, folderForInputFiles);
+            newInputFileForMHSMxp.createAllInputFilesFromConfig(ontology, folderWithConfigFiles);
+        }
+
+        /** Stare vstupy **/
+        /*//ontologia, z ktorej vychadzame - ideme do nej pridavat axiom
         String fileWithOntology = "test-cases/lubm-0.owl" ;
         //pocet individualov, iba kvoli nazvy suboru
         String numberOfIndividuals = "0";
@@ -188,7 +210,7 @@ public class Main {
             m.createModifiedOntology(fileWithOntology, numberOfIndividuals, fileWithClasses, folder, uriNewClass, i, y, folderNameAlgorithm, 1, classFromConfig, individualFromConfig, uriNewIndividual);
         }
 
-        /*ChangeInFile change = new ChangeInFile();
+        ChangeInFile change = new ChangeInFile();
         for(int i = 5; i <= 5; i++){
             for(int j = 10; j <= 14; j++){
                 String number = "0";
